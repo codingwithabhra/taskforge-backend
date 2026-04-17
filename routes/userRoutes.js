@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const UserDatas = require("../model/user.models");
+const UserDatas = require("../models/user.models");
 
 // to create new data
 async function createNewUser(newData) {

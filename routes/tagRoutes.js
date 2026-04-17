@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TagsDatas = require("../model/tag.models");
+const TagsDatas = require("../models/tag.models");
 const authMiddleware = require("../middleware/authMiddleware");
 
 // to create new data

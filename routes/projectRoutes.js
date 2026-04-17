@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const ProjectDatas = require("../model/project.models");
+const ProjectDatas = require("../models/project.models");
 const authMiddleware = require("../middleware/authMiddleware");
 
 // to create new data

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TeamDatas = require("../model/team.models");
+const TeamDatas = require("../models/team.models");
 const authMiddleware = require("../middleware/authMiddleware"); // import
 
 // to create new data

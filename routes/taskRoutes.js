@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TaskDatas = require("../model/task.models");
+const TaskDatas = require("../models/task.models");
 
 // to create new data
 async function createNewTask(newData){
