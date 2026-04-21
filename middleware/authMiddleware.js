@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 
-const authMiddleware  = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
 
     const authHeader = req.headers.authorization;
 
-    if (!authHeader) {
-        return res.status(401).json({ message: "No token provided" });
+    console.log("Auth Header:", authHeader);
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "it is Invalid token format" });
     }
 
     // Extract token from "Bearer <token>"
