@@ -5,14 +5,14 @@ const authMiddleware = (req, res, next) => {
 
     console.log("Auth Header:", authHeader);
 
-    // ✅ Check header format
+    // Check header format
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(401).json({
             message: "Invalid token format (Bearer missing)"
         });
     }
 
-    // ✅ Extract token
+    // Extract token
     const token = authHeader.split(" ")[1];
 
     console.log("Extracted Token:", token);
@@ -25,7 +25,7 @@ const authMiddleware = (req, res, next) => {
     }
 
     try {
-        // ✅ Verify token
+        // Verify token
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
         console.log("Decoded Token:", decodedToken);
@@ -39,7 +39,7 @@ const authMiddleware = (req, res, next) => {
         console.log("JWT ERROR:", error.message);
 
         return res.status(401).json({
-            message: error.message   // 🔥 shows exact issue
+            message: error.message   // shows exact issue
         });
     }
 };

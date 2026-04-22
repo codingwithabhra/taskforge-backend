@@ -15,10 +15,6 @@ async function createNewTeam(newData){
     };
 };
 
-router.get("/", (req, res) => {
-    res.send("Welcome to TEAM MODEL");
-});
-
 // to create new team
 router.post("/", authMiddleware, async(req, res) => {
     try {
