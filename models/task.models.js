@@ -23,7 +23,7 @@ const taskSchema = new mongoose.Schema({
             required: true
         } // Refers to User model (owners)
     ],
-    tags: [{ type: String }], // Array of tags
+    tags: [String], // Array of tags
     timeToComplete: {
         type: Number,
         required: true

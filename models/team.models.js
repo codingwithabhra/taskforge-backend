@@ -9,7 +9,9 @@ const teamSchema = new mongoose.Schema({
     }, // Team names must be unique
     members: [
         {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
         }
     ]
 },
