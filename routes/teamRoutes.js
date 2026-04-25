@@ -29,7 +29,7 @@ router.post("/", authMiddleware, async(req, res) => {
 // to get all the team
 async function getAllTeam(){
     try {
-        const allTeams = await TeamDatas.find();
+        const allTeams = await TeamDatas.find().populate("members", "name email");
         return allTeams;
     } catch (error) {
         throw error;
