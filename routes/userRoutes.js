@@ -51,28 +51,28 @@ router.post("/signup", async (req, res) => {
 });
 
 // to get all the data
-// async function getAllUser() {
-//     try {
-//         const allUsers = await UserDatas.find();
-//         return allUsers;
-//     } catch (error) {
-//         throw error;
-//     };
-// };
+async function getAllUser() {
+    try {
+        const allUsers = await UserDatas.find();
+        return allUsers;
+    } catch (error) {
+        throw error;
+    };
+};
 
-// router.get("/signup", async (req, res) => {
-//     try {
-//         const allUsers = await getAllUser();
-//         if (allUsers.length !== 0) {
-//             res.json(allUsers);
-//         } else {
-//             res.status(404).json({ message: "No user found" });
-//         };
-//     } catch (error) {
-//         console.log("The error is - ", error);
-//         res.status(500).json({ error: "Failed to fetch users from database" });
-//     }
-// });
+router.get("/users", async (req, res) => {
+    try {
+        const allUsers = await getAllUser();
+        if (allUsers.length !== 0) {
+            res.json(allUsers);
+        } else {
+            res.status(404).json({ message: "No user found" });
+        };
+    } catch (error) {
+        console.log("The error is - ", error);
+        res.status(500).json({ error: "Failed to fetch users from database" });
+    }
+});
 
 //Log in route
 router.post("/login", async (req, res) => {
