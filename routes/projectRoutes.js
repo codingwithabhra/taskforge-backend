@@ -15,10 +15,6 @@ async function createNewProject(newData){
     };
 };
 
-router.get("/", (req, res) => {
-    res.send("Welcome to PROJECT MODEL");
-});
-
 router.post("/", authMiddleware, async(req, res) => {
     try {
         const createnewProject = await createNewProject(req.body);

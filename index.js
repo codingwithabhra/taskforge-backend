@@ -28,7 +28,7 @@ app.use("/teams", teamRoutes); // Use routes
 const taskRoutes = require("./routes/taskRoutes"); // Import routes
 app.use("/tasks", taskRoutes); // Use routes
 
-// ---------------------------------------- FOR TAG MODEL ----------------------------------------
+// ---------------------------------------- FOR TAG MODEL -----------------------------------------
 
 const tagRoutes = require("./routes/tagRoutes"); // Import routes
 app.use("/tags", tagRoutes); // Use routes
