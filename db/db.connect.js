@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const mongoUri = process.env.MONGODB;
 
-const initializeDatabase = async () => {
+const initialisedatabase = async () => {
   try {
     await mongoose.connect(mongoUri);
     console.log("Connected to database");
@@ -13,4 +13,4 @@ const initializeDatabase = async () => {
   }
 };
 
-module.exports = { initializeDatabase };
+module.exports = { initialisedatabase };
