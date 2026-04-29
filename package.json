@@ -17,5 +17,13 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingwithabhra/taskforge-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codingwithabhra/taskforge-backend/issues"
+  },
+  "homepage": "https://github.com/codingwithabhra/taskforge-backend#readme"
 }

@@ -8,7 +8,7 @@ const corsOption = {
     credentials: true,
     optionSuccessStatus: 200,
 };
-app.use(cors({ origin: "" }));
+app.use(cors(corsOption));
 
 const { initialisedatabase } = require("./db/db.connect");
 initialisedatabase();
