@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const TaskDatas = require("../models/task.models");
+const authMiddleware = require("../middleware/authMiddleware");
 
 // to create new data
 async function createNewTask(newData){
@@ -14,11 +15,7 @@ async function createNewTask(newData){
     };
 };
 
-router.get("/", (req, res) => {
-    res.send("Welcome to TASK MODEL");
-});
-
-router.post("/", async(req, res) => {
+router.post("/", authMiddleware, async(req, res) => {
     try {
         const createnewTask = await createNewTask(req.body);
         res.status(201).json({message: "Task created successfully", data: createnewTask});
@@ -38,7 +35,7 @@ async function getAllTask(){
     };
 };
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
     try {
         const allTasks = await getAllTask();
         if(allTasks.length !== 0){
