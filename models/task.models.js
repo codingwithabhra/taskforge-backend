@@ -34,6 +34,11 @@ const taskSchema = new mongoose.Schema({
         // Enum for task status
         default: 'To Do',
     },
+    priority: {
+        type: String,
+        enum: ["high", "medium", "low"],
+        default: "medium"
+    }
 },
     {
         timestamps: true,
