@@ -28,7 +28,7 @@ router.post("/", authMiddleware, async(req, res) => {
 // to get all the data
 async function getAllTask(){
     try {
-        const allTasks = await TaskDatas.find();
+        const allTasks = await TaskDatas.find().populate("owners", "name email");
         return allTasks;
     } catch (error) {
         throw error;

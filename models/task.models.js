@@ -25,9 +25,9 @@ const taskSchema = new mongoose.Schema({
     ],
     tags: [String], // Array of tags
     timeToComplete: {
-        type: Number,
+        type: Date,
         required: true
-    }, // Number of days to complete the task
+    }, // Date by which the task should be completed
     status: {
         type: String,
         enum: ['To Do', 'In Progress', 'Completed', 'Blocked'],
