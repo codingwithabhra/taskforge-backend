@@ -100,9 +100,17 @@ router.post("/login", async (req, res) => {
             { expiresIn: "1d" }
         );
 
+        // Remove password before sending user
+        const userWithoutPassword = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        };
+
         res.json({
             message: "Login successful",
-            token
+            token,
+            user: userWithoutPassword,
         });
 
     } catch (error) {
