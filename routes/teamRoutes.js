@@ -83,7 +83,7 @@ router.post("/:teamId/add-member", authMiddleware, async(req, res) => {
 });
 
 //to delete team member
-async function deleteTeamMember(teamId, memberId) {
+async function deleteTeamMember(teamId, memberIds) {
     try {
         const deleteMember = await TeamDatas.findByIdAndUpdate(teamId, 
             {
