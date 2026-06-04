@@ -51,12 +51,12 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 //to update team data with new member
-async function updateTeamData(teamId, memberId){
+async function updateTeamData(teamId, memberIds){
     try {
         const teamDataToUpdate = await TeamDatas.findByIdAndUpdate(teamId, 
             {
                 $addToSet: {
-                    members: memberId
+                    members: { $each: memberIds }
                 }
             },
             { new: true}).populate("members", "name email");
@@ -68,9 +68,9 @@ async function updateTeamData(teamId, memberId){
 
 router.post("/:teamId/add-member", authMiddleware, async(req, res) => {
     try {
-        const { memberId } = req.body;
+        const { memberIds } = req.body;
 
-        const updateTeam = await updateTeamData(req.params.teamId, memberId);
+        const updateTeam = await updateTeamData(req.params.teamId, memberIds);
         if (updateTeam) {
             res.status(201).json({ message: "Member added successfully", data: updateTeam });
         } else {
@@ -85,7 +85,7 @@ router.post("/:teamId/add-member", authMiddleware, async(req, res) => {
 //to delete team member
 async function deleteTeamMember(teamId, memberId) {
     try {
-        const deleteMember = await TeamDatas.findByIdAndDelete(teamId, 
+        const deleteMember = await TeamDatas.findByIdAndUpdate(teamId, 
             {
                 $pull: {
                     members: memberId
