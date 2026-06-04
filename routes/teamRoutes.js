@@ -100,9 +100,9 @@ async function deleteTeamMember(teamId, memberId) {
 
 router.delete("/:teamId/remove-member", authMiddleware, async (req, res) => {
     try {
-        const { memberId } = req.body;
+        const { memberIds } = req.body;
 
-        const deleteTeamMemberData = await deleteTeamMember(req.params.teamId, memberId);
+        const deleteTeamMemberData = await deleteTeamMember(req.params.teamId, memberIds);
 
         if(deleteTeamMemberData){
             res.status(200).json({ message: "Member removed successfully", data: deleteTeamMemberData});
