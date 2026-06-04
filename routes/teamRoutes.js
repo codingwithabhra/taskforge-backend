@@ -50,4 +50,69 @@ router.get("/", authMiddleware, async (req, res) => {
     }
 });
 
+//to update team data with new member
+async function updateTeamData(teamId, memberId){
+    try {
+        const teamDataToUpdate = await TeamDatas.findByIdAndUpdate(teamId, 
+            {
+                $addToSet: {
+                    members: memberId
+                }
+            },
+            { new: true}).populate("members", "name email");
+        return teamDataToUpdate;
+    } catch (error) {
+        throw error;
+    }
+};
+
+router.post("/:teamId/add-member", authMiddleware, async(req, res) => {
+    try {
+        const { memberId } = req.body;
+
+        const updateTeam = await updateTeamData(req.params.teamId, memberId);
+        if (updateTeam) {
+            res.status(201).json({ message: "Member added successfully", data: updateTeam });
+        } else {
+            res.status(404).json({ error: "Team not found" });
+        }
+    } catch (error) {
+        console.log("The error is - ", error);
+        res.status(500).json({ error: "Failed to add member" });
+    }
+});
+
+//to delete team member
+async function deleteTeamMember(teamId, memberId) {
+    try {
+        const deleteMember = await TeamDatas.findByIdAndDelete(teamId, 
+            {
+                $pull: {
+                    members: memberId
+                }
+            },
+        ).populate("members", "name email");
+        return deleteMember;
+    } catch (error) {
+        throw error;
+    }
+};
+
+router.delete("/:teamId/remove-member", authMiddleware, async (req, res) => {
+    try {
+        const { memberId } = req.body;
+
+        const deleteTeamMemberData = await deleteTeamMember(req.params.teamId, memberId);
+
+        if(deleteTeamMemberData){
+            res.status(200).json({ message: "Member removed successfully", data: deleteTeamMemberData});
+        } else {
+            res.status(404).json({error: "Team not found"});
+        }
+    } catch (error) {
+        console.log("The error is - ", error);
+        res.status(500).json({error: "Failed to remove team member"});
+    }
+})
+
 module.exports = router;
