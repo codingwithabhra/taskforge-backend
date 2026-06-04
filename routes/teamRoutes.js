@@ -113,6 +113,31 @@ router.delete("/:teamId/remove-member", authMiddleware, async (req, res) => {
         console.log("The error is - ", error);
         res.status(500).json({error: "Failed to remove team member"});
     }
-})
+});
+
+// to delete complete team data
+async function deleteTeamData(teamId){
+    try {
+        const deleteTeam = await TeamDatas.findByIdAndDelete(teamId);
+        return deleteTeam;
+    } catch (error) {
+        throw error;
+    }
+};
+
+router.delete("/:teamId", authMiddleware, async(req, res)=> {
+    try {
+        const deletedteam = await deleteTeamData(req.params.teamId);
+
+        if(deletedteam){
+            res.status(200).json({message: "Team deleted successfully", data: deletedteam});
+        } else {
+            res.status(404).json({error: "Team not found"});
+        }
+    } catch (error) {
+        console.log("The error is : ", error);
+        res.status(500).json({error: "Failed to delete team"});
+    }
+});
 
 module.exports = router;
