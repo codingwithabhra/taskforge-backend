@@ -88,7 +88,7 @@ async function deleteTeamMember(teamId, memberIds) {
         const deleteMember = await TeamDatas.findByIdAndUpdate(teamId, 
             {
                 $pull: {
-                    members: memberIds
+                    members: { $in: memberIds }
                 }
             },
         ).populate("members", "name email");
