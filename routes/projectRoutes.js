@@ -84,4 +84,29 @@ router.delete("/:projectId", authMiddleware, async (req, res) => {
     }
 });
 
+// to update project by ID
+async function updateProjectById(projectId, updateData) {
+    try {
+        const updatedProject = await ProjectDatas.findByIdAndUpdate(projectId, updateData, {new: true,});
+        return updatedProject;
+    } catch (error) {
+        throw error;
+    }
+};
+
+router.post("/:projectId", authMiddleware, async (req, res) => {
+    try {
+        const updatedProject = await updateProjectById(req.params.projectId, req.body);
+
+        if (updatedProject) {
+            res.status(200).json({message: "Project updated successfully", data: updatedProject});
+        } else {
+            res.status(404).json({message: "Project not found"});
+        }
+    } catch (error) {
+        console.log("The error is - ", error);
+        res.status(500).json({error: "Failed to update project"});
+    }
+});
+
 module.exports = router;

@@ -9,6 +9,15 @@ const UserDatas = require("../models/user.models");
 // to create new data
 async function createNewUser(newData) {
     try {
+        // Password Validation
+        if (newData.password.length < 7) {
+            throw new Error("Password must be at least 7 characters");
+        }
+
+        if (newData.password.length > 15) {
+            throw new Error("Password cannot exceed 15 characters");
+        };
+
         //Checking if email already exists
         const existingUser = await UserDatas.findOne({ email: newData.email });
         if (existingUser) {
@@ -42,8 +51,12 @@ router.post("/signup", async (req, res) => {
         const createnewUser = await createNewUser(req.body);
         res.status(201).json({ message: "User created successfully", data: createnewUser });
     } catch (error) {
-        if (error.message === "Email already registered") {
-            return res.status(400).json({ error: error.message });
+        if (
+            error.message === "Email already registered" ||
+            error.message === "Password must be at least 7 characters" ||
+            error.message === "Password cannot exceed 15 characters"
+        ) {
+            return res.status(400).json({error: error.message});
         }
         console.log("The error is - ", error);
         res.status(500).json({ error: "Failed to create user" });
